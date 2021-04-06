@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MigraDocCore.DocumentObjectModel" Version="0.1.1" />
+    <PackageReference Include="MigraDocCore.Rendering" Version="0.1.0" />
+    <PackageReference Include="PdfSharpCore" Version="1.2.11" />
+  </ItemGroup>
+
+</Project>
