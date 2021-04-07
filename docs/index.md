@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## Welcome to the Invoice kit Docs
 
 You can use the [editor on GitHub](https://github.com/hnicolus/invoice-kit/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
 
