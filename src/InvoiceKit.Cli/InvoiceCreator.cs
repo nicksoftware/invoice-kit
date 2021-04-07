@@ -18,24 +18,25 @@ namespace InvoiceKit.Cli
 
         public void Start()
         {
-
-            //string name = AnsiConsole.Ask<string>("What's your [green]name[/]?");
+            //Get COmpany name
+            //Company Address
             Create();
         }
 
         public void Create()
         {
-            var theme = Theme.UseTheme(ThemeOptions.OrangeGroove);
-            new InvoiceBuilder(SizeOption.A4, OrientationOption.Landscape, "£")
+            var theme = Theme.UseTheme(ThemeOptions.BlueAsTheOcean);
+            new InvoiceBuilder(SizeOption.A4, OrientationOption.Landscape, "R")
                 .TextColor(theme.TextColor)
                 .BackColor(theme.BackColor)
                 .Image(@"invoice.png", 125, 27)
-                .Company(Address.Make("FROM", new string[] { "Vodafone Limited", "Vodafone House", "The Connection", "Newbury", "Berkshire RG14 2FN" }, "1471587", "569953277"))
-                .Client(Address.Make("BILLING TO", new string[] { "Isabella Marsh", "Overton Circle", "Little Welland", "Worcester", "WR## 2DJ" }))
+                .Company(Address.Make("FROM", new string[] { "Devmania", "Cautious Inventions", "40 Portland Avenue", "Hurst Hill", "Johannesburg" }, "2092"))
+                .Client(Address.Make("BILLING TO", new string[] { "Khozi Properties", "Student Accommodations", "Melville", "Johannesburg", "2094" }))
                 .Items(new List<ItemRow> {
-                    ItemRow.Make("Nexus 6", "Midnight Blue", (decimal)1, 20, (decimal)166.66, (decimal)199.99),
-                    ItemRow.Make("24 Months (£22.50pm)", "100 minutes, Unlimited texts, 100 MB data 3G plan with 3GB of UK Wi-Fi", (decimal)1, 20, (decimal)360.00, (decimal)432.00),
-                    ItemRow.Make("Special Offer", "Free case (blue)", (decimal)1, 0, (decimal)0, (decimal)0),
+                    ItemRow.Make("Stuff Manangement System", "React Frontend , Localization included,Role Management,Notification System", (decimal)45_0000, 20, (decimal)166.66, (decimal)45_1230),
+                    ItemRow.Make("Android App", "Allow users to check in,Role management, Task Management", (decimal)34_000, 20, (decimal)360.00, (decimal)34_432.00),
+                    ItemRow.Make("iOS App", "same as android app", (decimal)34_000, 0, (decimal)0, (decimal)0),
+                    ItemRow.Make("", "", (decimal)0, 0, (decimal)0, (decimal)0),
                 })
                 .Totals(new List<TotalRow> {
                     TotalRow.Make("Sub Total", (decimal)526.66),
@@ -44,13 +45,13 @@ namespace InvoiceKit.Cli
                 })
                 .Details(new List<DetailRow> {
                     DetailRow.Make("PAYMENT INFORMATION",
-                    "Make all cheques payable to Vodafone UK Limited.",
+                    "Make all cheques payable to Cautious Inventions.",
                     "",
-                    "If you have any questions concerning this invoice, contact our sales department at sales@vodafone.co.uk.",
+                    "If you have any questions concerning this invoice, contact our sales department at sales@CautiousInventions.co.za.",
                     "",
                     "Thank you for your business.")
                 })
-                .Footer("http://www.vodafone.co.uk")
+                .Footer("http://www.CautiousInventions.co.za")
                 .Save();
         }
     }

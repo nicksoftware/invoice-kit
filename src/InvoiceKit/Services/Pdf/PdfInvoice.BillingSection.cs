@@ -1,13 +1,7 @@
 
 using InvoiceKit.Helpers;
 using MigraDocCore.DocumentObjectModel;
-using MigraDocCore.DocumentObjectModel.MigraDoc.DocumentObjectModel.Shapes;
-using MigraDocCore.DocumentObjectModel.Shapes;
 using MigraDocCore.DocumentObjectModel.Tables;
-using PdfSharpCore.Utils;
-using SixLabors.ImageSharp.PixelFormats;
-
-
 namespace InvoiceKit.Pdf
 {
     public partial class PdfInvoice
@@ -50,8 +44,9 @@ namespace InvoiceKit.Pdf
         {
             Row row = table.AddRow();
             row.HeadingFormat = true;
+            row.Height = Unit.FromCentimeter(1.0);
             row.Style = "H2-10B-Color";
-            row.Shading.Color = Colors.White;
+            row.Shading.Color = Colors.WhiteSmoke;
             row.TopPadding = 10;
             row.Borders.Bottom = BorderLine;
 
