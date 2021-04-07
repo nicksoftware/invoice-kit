@@ -3,6 +3,7 @@ using MigraDocCore.DocumentObjectModel;
 using MigraDocCore.Rendering;
 using PdfSharpCore.Pdf.Security;
 using System;
+using System.Diagnostics;
 
 namespace InvoiceKit.Pdf
 {
@@ -88,6 +89,24 @@ namespace InvoiceKit.Pdf
             FooterSection();
         }
 
+
+        public Document GenerateDocument(PdfInvoice pdfInvoice = null)
+        {
+            Pdf.DefaultPageSetup.PageFormat = InvoiceFormat;
+            Pdf.DefaultPageSetup.Orientation = InvoiceOrientation;
+            Pdf.DefaultPageSetup.TopMargin = 125;
+            Pdf.Info.Title = Invoice.Title;
+
+            DefineStyles();
+
+            Pdf.AddSection();
+            HeaderSection();
+            AddressSection();
+            BillingSection();
+            PaymentSection();
+            FooterSection();
+            return Pdf;
+        }
 
         private void SetPassword(PdfDocumentRenderer renderer, string password)
         {

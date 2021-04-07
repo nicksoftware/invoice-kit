@@ -42,12 +42,13 @@ namespace InvoiceKit.Pdf
             if (Invoice.Company.HasCompanyNumber || Invoice.Company.HasVatNumber)
             {
                 row = table.AddRow();
-
+                row.Height = Unit.FromCentimeter(1);
                 Color shading = MigraDocHelpers.TextColorFromHtml(Invoice.TextColor);
 
                 if (Invoice.Company.HasCompanyNumber && Invoice.Company.HasVatNumber)
                 {
-                    row.Cells[0].AddParagraph(string.Format("Company Number: {0}, VAT Number: {1}",
+                    row.Cells[0]
+                    .AddParagraph(string.Format("Company Number: {0}, VAT Number: {1}",
                         Invoice.Company.CompanyNumber, Invoice.Company.VatNumber),
                         ParagraphAlignment.Center, "H2-9B-Inverse")
                         .Format.Shading.Color = shading;

@@ -1,13 +1,6 @@
-
 using InvoiceKit.Helpers;
 using MigraDocCore.DocumentObjectModel;
-using MigraDocCore.DocumentObjectModel.MigraDoc.DocumentObjectModel.Shapes;
-using MigraDocCore.DocumentObjectModel.Shapes;
 using MigraDocCore.DocumentObjectModel.Tables;
-using PdfSharpCore.Utils;
-using SixLabors.ImageSharp.PixelFormats;
-
-
 namespace InvoiceKit.Pdf
 {
     public partial class PdfInvoice

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using InvoiceKit.Extensions;
 using InvoiceKit.Pdf;
+using InvoiceKit.Themes;
+using MigraDocCore.DocumentObjectModel;
+
 namespace InvoiceKit
 {
     public class InvoiceBuilder : IInvoiceBuilder
@@ -34,13 +37,13 @@ namespace InvoiceKit
             Invoice.Reference = DefaultReference;
         }
 
-        public IInvoicerOptions BackColor(string color)
+        public IInvoicerOptions WithBackColor(string color)
         {
             Invoice.BackColor = color;
             return this;
         }
 
-        public IInvoicerOptions TextColor(string color)
+        public IInvoicerOptions WithTextColor(string color)
         {
             Invoice.TextColor = color;
             return this;
@@ -133,6 +136,27 @@ namespace InvoiceKit
             new PdfInvoice(Invoice).Save(filename, password);
         }
 
+        public IInvoicerOptions WithTheme(Theme theme)
+        {
+            Invoice.TextColor = theme.TextColor;
+            Invoice.BackColor = theme.BackColor;
+            return this;
+        }
+
+        public IInvoicerOptions WithTheme(ThemeOptions theme)
+        {
+            var selectedTheme = Theme.CreateTheme(theme);
+            Invoice.TextColor = selectedTheme.TextColor;
+            Invoice.BackColor = selectedTheme.BackColor;
+
+            return this;
+        }
+
+        public Document GenerateDocument(PdfInvoice pdfInvoice = null)
+        {
+            var doc = new PdfInvoice(Invoice).GenerateDocument();
+            return doc;
+        }
     }
 
 }

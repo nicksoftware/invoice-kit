@@ -38,7 +38,7 @@ namespace InvoiceKit.Cli
             return option;
         }
 
-        private static void DisplayHeading()
+        public static void DisplayHeading()
         {
             var rollDice = new Random();
 

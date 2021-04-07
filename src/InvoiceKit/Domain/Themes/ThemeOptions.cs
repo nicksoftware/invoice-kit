@@ -1,11 +1,10 @@
 namespace InvoiceKit.Themes
 {
-    public static class ThemeOptions
+    public enum ThemeOptions
     {
-
-        public const string OrangeGroove = "Orange Groove";
-        public const string BlueAsTheOcean = "Blue as the Ocean";
-        public const string RedDoesntMeanDanger = "Red doesn't mean Danger";
-        public const string GreenForThePlants = "Green just like the grass";
+        ORANGE_GROOVE = 0,
+        BLUE_AS_THE_OCEAN = 1,
+        RED_DOESNT_MEAN_DANGER = 2,
+        GREEN_LIKE_THE_PLANTS = 3
     }
 }

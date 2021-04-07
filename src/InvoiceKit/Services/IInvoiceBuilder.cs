@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using InvoiceKit.Themes;
+using InvoiceKit.Pdf;
+using MigraDocCore.DocumentObjectModel;
 
 namespace InvoiceKit
 {
@@ -9,15 +12,16 @@ namespace InvoiceKit
 
     public interface IInvoicerOptions : IInvoicerActions
     {
+        IInvoicerOptions WithTheme(ThemeOptions theme);
         /// <summary>
         /// Set a custom html color to personalize the document background
         /// </summary>
-        IInvoicerOptions BackColor(string color);
+        IInvoicerOptions WithBackColor(string color);
 
         /// <summary>
         /// Set a custom html color to personalize the document text
         /// </summary>
-        IInvoicerOptions TextColor(string color);
+        IInvoicerOptions WithTextColor(string color);
 
         /// <summary>
         /// Add a logo to the left corner of the document.
@@ -96,5 +100,7 @@ namespace InvoiceKit
         /// <param name="filename">Filename of the PDF that will be created</param>
         /// <param name="password">Leave null (default) or set a password</param>
         void Save(string filename = null, string password = null);
+        Document GenerateDocument(PdfInvoice pdfInvoice = null);
+
     }
 }

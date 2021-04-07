@@ -52,7 +52,7 @@ namespace InvoiceKit.Pdf
 
             row.Cells[0].AddParagraph("PRODUCT", ParagraphAlignment.Left);
             row.Cells[1].AddParagraph("AMOUNT", ParagraphAlignment.Center);
-            row.Cells[2].AddParagraph("VAT %", ParagraphAlignment.Center);
+            // row.Cells[2].AddParagraph("VAT %", ParagraphAlignment.Center);
             row.Cells[3].AddParagraph("UNIT PRICE", ParagraphAlignment.Center);
             if (Invoice.HasDiscount)
             {
@@ -79,9 +79,9 @@ namespace InvoiceKit.Pdf
             cell.VerticalAlignment = VerticalAlignment.Center;
             cell.AddParagraph(item.Amount.ToCurrency(), ParagraphAlignment.Center, "H2-9");
 
-            cell = row.Cells[2];
-            cell.VerticalAlignment = VerticalAlignment.Center;
-            cell.AddParagraph(item.VAT.ToCurrency(), ParagraphAlignment.Center, "H2-9");
+            // cell = row.Cells[2];
+            // cell.VerticalAlignment = VerticalAlignment.Center;
+            // cell.AddParagraph(item.VAT.ToCurrency(), ParagraphAlignment.Center, "H2-9");
 
             cell = row.Cells[3];
             cell.VerticalAlignment = VerticalAlignment.Center;
