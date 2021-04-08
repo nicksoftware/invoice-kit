@@ -6,6 +6,7 @@ using Spectre.Console;
 using System.Diagnostics;
 using System.Linq;
 using System.IO;
+using System.Threading;
 
 namespace InvoiceKit.Cli
 {
@@ -41,7 +42,7 @@ namespace InvoiceKit.Cli
         {
             ClearScreen();
 
-            CompanyName = AnsiConsole.Ask<string>("What is your [bold]Company[/] Called ?");
+            CompanyName = AnsiConsole.Ask<string>("What is your [green]Company[/] Called ?");
             Email = AnsiConsole.Ask<string>("Please enter your [bold]Company's[/] Email address?");
             WebSite = AnsiConsole.Ask<string>("Please enter your [bold]Company's[/] Website Url");
             RegistrationNumber = AnsiConsole.Ask<string>("Enter your Company's VAT number");
@@ -66,9 +67,7 @@ namespace InvoiceKit.Cli
 
             clientAddress = PromptAddress("Client's");
             ClearScreen();
-            PromprFileOutput();
-            _fileName = AnsiConsole.Ask<string>("Enter invoice output file name");
-            ClearScreen();
+
             do
             {
                 AnsiConsole.MarkupLine("[yellow] Invoice Items and their costs[/]");
@@ -80,8 +79,42 @@ namespace InvoiceKit.Cli
                     break;
                 }
             } while (true);
+
+            PromprFileOutput();
+            _fileName = AnsiConsole.Ask<string>("Enter invoice output file name");
+            ClearScreen();
             ThemeSelected = _themeCollection[themeName];
+            AnsiConsole.Status()
+                .Start("Starting Render Process...", ctx =>
+                {
+                    // Simulate some work
+                    AnsiConsole.MarkupLine("Validating Output path...");
+                    Thread.Sleep(1000);
+                    if (Directory.Exists(_pdfOutputPath))
+                    {
+                        ctx.Status("Directory Exists..");
+
+                    }
+
+                    // Update the status and spinner
+                    ctx.Status("Validating File name and triming file name.. ");
+                    if (_fileName.Contains(' '))
+                    {
+                        _fileName = _fileName.Replace(' ', '_');
+                    }
+
+                    ctx.Spinner(Spinner.Known.Star);
+
+                    ctx.SpinnerStyle(Style.Parse("green"));
+
+                    // Simulate some work
+                    AnsiConsole.MarkupLine("Generating Pdf...");
+                    Thread.Sleep(2000);
+                });
+
             Create();
+            var path = Directory.EnumerateDirectories(Path.Combine(_pdfOutputPath)).ToList();
+            AnsiConsole.MarkupLine($"Invoice Pdf successfully Generated and stored in {Path.Combine(_pdfOutputPath, _fileName) + ".pdf"}");
         }
 
         private static void ClearScreen()
@@ -132,10 +165,10 @@ namespace InvoiceKit.Cli
                     item.Description,
                     item.Amount.ToString(),
                     "15%",
-                    item.Price.ToString(),
+                    CurrencySymbol +item.Price.ToString(),
                     item.HasDiscount.ToString(),
                     item.Discount,
-                    item.Total.ToString()
+                    CurrencySymbol + item.Total.ToString()
                 });
             }
             var invoiceItemsItable = root.AddNode("[yellow]Invoice Items Preview [/]");
@@ -168,8 +201,8 @@ namespace InvoiceKit.Cli
             var vatCost = (decimal)_items.Sum(it => it.Total) * (15 / 100);
             var total = subTotal + vatCost;
 
-            var fromAddress = CompanyName + companyAddress;
-            var toAddress = ClientName + clientAddress;
+            var fromAddress = $"{CompanyName },{companyAddress}";
+            var toAddress = $"{ClientName },{clientAddress}";
             new InvoiceBuilder(PageSize, PageOrientation, CurrencySymbol)
              .WithTheme(Theme.CreateTheme(ThemeSelected))
                  .Image(BrandImage)

@@ -20,6 +20,7 @@ namespace InvoiceKit.Cli
 
                 ProcessMenuOption(userOption);
 
+                AnsiConsole.MarkupLine("Press any key to continue...");
                 Console.ReadKey();
             } while (true);
 
