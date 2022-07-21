@@ -2,7 +2,15 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
+    <Title>Invoice kit cli</Title>
+    <Authors>Nicolas Maluleke</Authors>
+    <Description>Create Invoices using your CLI</Description>
+    <PackageProjectUrl>https://hnicolus.github.io/invoice-kit/</PackageProjectUrl>
+    <PackageIcon>invoice.png</PackageIcon>
+    <RepositoryUrl>https://github.com/hnicolus/invoice-kit</RepositoryUrl>
+    <PackageTags>invoices cli</PackageTags>
+    <PackageReleaseNotes>alpha release</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Spectre.Console" Version="0.38.0" />
@@ -10,5 +18,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InvoiceKit\InvoiceKit.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="invoice.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 </Project>
