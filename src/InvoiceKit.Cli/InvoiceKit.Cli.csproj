@@ -11,7 +11,7 @@
     <ToolCommandName>invoice</ToolCommandName>
     <PackageOutputhPath>./nuget</PackageOutputhPath>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageId>invoice.kit.cli</PackageId>
+    <PackageId>InvoiceKit.Cli</PackageId>
     <Title>Invoice kit Cli</Title>
     <Description>Create Invoice pdf's using your cli</Description>
     <PackageProjectUrl>https://hnicolus.github.io/invoice-kit/</PackageProjectUrl>
