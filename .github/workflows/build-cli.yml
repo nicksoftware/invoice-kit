@@ -33,3 +33,7 @@ jobs:
         name: invoice-kit-cli
         path: |
           ./**/*.nupkg
+    - name: Publish NuGet
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: ./nuget/*.nupkg
