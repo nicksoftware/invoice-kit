@@ -3,9 +3,6 @@ name: .NET
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
 jobs:
   build:
 
@@ -25,7 +22,7 @@ jobs:
       run: dotnet build -c release --no-restore
       
     - name: Package Invoice kit
-      run: dotnet pack -c release -o ./nuget/
+      run: dotnet pack -c release --no-build -o ./nuget/
 
     - name: Upload Cli Artifact
       uses: actions/upload-artifact@v3.1.0
@@ -34,6 +31,4 @@ jobs:
         path: |
           ./**/*.nupkg
     - name: Publish NuGet
-      uses: brandedoutcast/publish-nuget@v2.5.5
-      with:
-        PROJECT_FILE_PATH: ./nuget/*.nupkg
+      run: dotnet nuget push "*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
